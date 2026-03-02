@@ -14,7 +14,12 @@
       },
       "repository": "https://github.com/alexmensch/claude-pm-plugins",
       "license": "MIT",
-      "keywords": "product management pm feature development"
+      "keywords": [
+        "product management",
+        "pm",
+        "product",
+        "feature development"
+      ]
     }
   ],
   "metadata": {
