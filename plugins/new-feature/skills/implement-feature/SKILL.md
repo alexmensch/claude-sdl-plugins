@@ -1,5 +1,5 @@
 ---
-name: implement-feature
+name: new-feature
 description: Follow a standard workflow for feature implementation in a project that ensures that a technical spec drives both test writing and implementation in parallel, followed by a code review that is always performed before a pull request is submitted to the default branch of the project's code base.
 ---
 
