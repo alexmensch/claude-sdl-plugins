@@ -13,6 +13,21 @@ You are running in the background in an isolated worktree. You cannot interact w
 
 ## Process
 
+### Step 0 — Verify write access
+
+Before doing anything else, verify that you have write access. Use the Write tool to create a small probe file in the project root:
+
+- Write a file named `.test-writer-probe` with the content `probe`.
+- Then immediately delete it using Bash: `rm .test-writer-probe`.
+
+If the Write tool is unavailable or fails, **immediately stop** and report this as a blocker in your output before taking any other action:
+
+> "BLOCKER — No write access. The Write and Edit tools are not available in this session. No analysis has been performed. The orchestrating session must re-invoke this agent with Write and Edit tool permissions."
+
+Do not proceed to Step 1 without confirmed write access. Catching this immediately avoids wasted analysis work.
+
+---
+
 ### Step 1 — Determine the test framework
 
 Before doing anything else:

@@ -7,7 +7,7 @@ When implementing a new feature or new functionality in an existing codebase, yo
 
 1. Before starting work, always create a new branch. Make sure that the default branch is at the latest version and make sure the new branch is created from the default branch. Never work in the default branch for the project, which is usually `master`, but may also be `main` in some cases. I do not care what the branch is called, you can decide.
 2. Require descriptive precision from the user's request when starting to implement a new feature. If there is ambiguity in changes that the user is requesting, without being pedantic, you must ask the user for clarification. Once you have a clear understanding of the requirements, summarise what you are about to pass to the technical-spec agent — describe the feature, the scope of changes, and any constraints you have understood — and use `AskUserQuestion` to ask the user to confirm before you proceed. Only after the user confirms should you invoke the technical-spec agent. The technical-spec agent will deeply analyse the codebase, produce a structured technical specification with a requirements table, and confirm the spec with the user within its own session. You will receive the approved spec back.
-3. Once you have the approved technical spec, start two things in parallel: hand the full technical spec to the test-writer agent (which runs in the background in an isolated worktree), and begin writing implementation code yourself against the same spec. Both you and test-writer work from the requirements table in the technical spec.
+3. Once you have the approved technical spec, start two things in parallel: hand the full technical spec to the test-writer agent (which runs in the background in an isolated worktree, and must be invoked with Write and Edit tool permissions), and begin writing implementation code yourself against the same spec. Both you and test-writer work from the requirements table in the technical spec.
 4. Once both you and the test-writer have finished, merge the test-writer's worktree changes into the current branch. Then run all tests for the whole project. In no circumstances will you change any code in the tests without confirming with the user first. The strong principle here is that tests are written to cover desired functionality, not just to pass. Never change tests just to make them pass — you must determine whether there is a genuine bug in the code you wrote first. If you think there is a bug in a test, confirm with the user first. This step is completed when all tests pass.
 5. Next, invoke the code-reviewer agent. It will review all changes on the branch, present findings to the user, make the user's approved changes, and create a single commit for the code review fixes.
 6. Run the linting tool that's configured for the project.
@@ -15,6 +15,18 @@ When implementing a new feature or new functionality in an existing codebase, yo
 8. Update README.md and CLAUDE.md in the project root for changes that are functionally noticeable to a user or developer of this codebase. Bug fixes, refactors, internal renaming, and test changes do not require documentation updates unless they change something observable from the outside.
 9. If the project uses semver and this change is being released, update the relevant files according to the set of changes being made, following semver conventions for major, minor, patch. Usually package.json and manifest.json contain semver versions for the project, but check the project CLAUDE.me documentation if in doubt, and add this information to CLAUDE.md if it is not already there. If you are not certain that the version should be updated, ask the user.
 10. As the final step, you will ask the user to commit all changes and create a PR.
+
+## Handling workflow deviations
+
+This workflow is designed to run in a specific sequence with specific agents handling specific roles. **You must never improvise a solution to a deviation.** If anything deviates from the expected workflow — including but not limited to an agent terminating early, an agent reporting a blocker, a step failing unexpectedly, or any situation not explicitly covered by these instructions — you must stop and use `AskUserQuestion` to inform the user of exactly what happened and ask how they would like to proceed.
+
+Specific rules:
+
+- If the test-writer agent terminates early or reports a blocker, **do not write the tests yourself**. Stop, report what happened, and ask the user how to proceed.
+- If any other agent fails, is unavailable, or does not complete its role, **do not take over that role**. Stop, report what happened, and ask the user how to proceed.
+- If you are ever uncertain whether a situation is covered by these instructions, ask before acting.
+
+The workflow exists for good reasons. Deviation without user approval undermines those reasons.
 
 ## Agent dependencies and handovers
 
