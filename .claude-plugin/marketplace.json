@@ -1,10 +1,27 @@
 {
   "name": "sdl-plugins",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "owner": {
     "name": "Alex Marshall"
   },
   "plugins": [
+    {
+      "name": "define-feature",
+      "source": "./plugins/define-feature",
+      "description": "Turn unstructured feature ideas into a precise requirements table through structured brainstorming. Output feeds directly into the build-feature plugin.",
+      "author": {
+        "name": "Alex Marshall"
+      },
+      "repository": "https://github.com/alexmensch/claude-sdl-plugins",
+      "license": "MIT",
+      "keywords": [
+        "product management",
+        "pm",
+        "product",
+        "feature definition",
+        "requirements"
+      ]
+    },
     {
       "name": "build-feature",
       "source": "./plugins/build-feature",

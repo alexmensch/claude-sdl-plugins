@@ -7,11 +7,30 @@ A collection of Claude Code plugins for product managers and developers who want
 Add this repository as a plugin marketplace, then install the plugin you want:
 
 ```
-/plugin marketplace add alexmensch/claude-pm-plugins
-/plugin install build-feature@pm-plugins
+/plugin marketplace add alexmensch/claude-sdl-plugins
+/plugin install define-feature@claude-sdl-plugins
+/plugin install build-feature@claude-sdl-plugins
 ```
 
 ## Plugins
+
+### define-feature
+
+Define a feature precisely before building it. Takes any unstructured idea — a sentence, a rough description, a half-formed thought — and turns it into a clean requirements table through structured brainstorming.
+
+Invoke it with `/define-feature` inside Claude Code and describe what you want to build. The skill acts as a sparring partner: it challenges whether the feature is necessary, surfaces edge cases you may not have considered, questions whether the proposed approach is the right one, and pushes back on anything vague or speculative. The goal is to arrive at the best outcome for users, not just to rubber-stamp ideas.
+
+The output is a Markdown requirements table ready to be passed directly to the `new-feature` skill in the `build-feature` plugin. When it is, `new-feature` will have no clarifying questions — the feature is already fully defined.
+
+#### When to use this
+
+Use `define-feature` before `new-feature` when:
+
+- The feature idea is still rough or unvalidated
+- You want a second perspective before committing to implementation
+- You want to ensure edge cases and scope are explicit before writing a technical spec
+
+---
 
 ### new-feature
 
