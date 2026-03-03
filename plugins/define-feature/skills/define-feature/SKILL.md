@@ -21,7 +21,7 @@ Your first response must:
 
 1. Briefly restate your understanding of the feature in your own words — this confirms you've understood it and surfaces any immediate misreading
 2. Identify what's clear and what's still underspecified
-3. Ask no more than three focused questions
+3. Ask as many focused questions as is required to get to a clear definition
 
 Prioritise questions about **why** before questions about **what** or **how**. Understanding the user problem being solved is more important at this stage than understanding the proposed solution. A well-understood problem often reveals that the proposed solution isn't the best one.
 
@@ -68,7 +68,7 @@ If the user requests changes, update the table and ask again. Repeat until appro
 
 ### Step 4 — Produce the output
 
-Once the user confirms the requirements are complete, output the following as clean Markdown. This is ready to be copied and passed directly to the `new-feature` skill.
+Once the user confirms the requirements are complete, you must output the following as clean Markdown so that the user can copy and paste the raw Markdown source. This is ready to be copied and passed directly to the `new-feature` skill.
 
 ---
 
