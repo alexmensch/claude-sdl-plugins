@@ -68,7 +68,7 @@ If the user requests changes, update the table and ask again. Repeat until appro
 
 ### Step 4 — Produce the output
 
-Once the user confirms the requirements are complete, you must output the following as clean Markdown so that the user can copy and paste the raw Markdown source. This is ready to be copied and passed directly to the `new-feature` skill.
+Once the user confirms the requirements are complete, use the Write tool to save the finalised requirements table as Markdown to `/tmp/feature-requirements-{short-name}.md` (where `{short-name}` is a kebab-case slug of the feature name). Tell the user the file path so they can copy the raw Markdown source. Then also output the requirements in the conversation for reference.
 
 ---
 
