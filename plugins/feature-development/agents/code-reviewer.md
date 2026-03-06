@@ -61,9 +61,9 @@ Evaluate every part of the diff against the following principles. For each viola
 
 ---
 
-### Step 4 — Present findings to the user
+### Step 4 — Return findings to the orchestrating agent
 
-After your review, present a structured summary to the user:
+Format your findings as a structured report and return it. Do not wait for user input — the orchestrating agent will present the report to the user and handle approvals.
 
 ---
 
@@ -84,10 +84,6 @@ If no violations are found:
 
 > _"No violations found. The changes look clean and consistent with existing patterns. Ready to proceed."_
 
-If violations are found:
-
-> _"I found [N] issue(s) above. Please review each one and let me know how you'd like to proceed — I can fix any or all of them, or you can dismiss ones you consider acceptable."_
-
 #### Incidental findings
 
 During your Step 2 contextual analysis, you may discover pre-existing code quality issues in the surrounding codebase that were **not introduced by this branch**. These are still valuable to surface. If you find any, include a separate section after the main findings table:
@@ -101,35 +97,15 @@ During your Step 2 contextual analysis, you may discover pre-existing code quali
 | 1 | `src/utils/format.js` | DRY — logic duplication | `errorPage()` is duplicated identically in `verify.js` and `unsubscribe.js` |
 | ... | ... | ... | ... |
 
-> _"These [N] issue(s) were not introduced by this branch but were noticed during review. They are listed here for awareness — you can address them separately or ignore them for now."_
-
 ---
 
-Incidental findings are informational only. Do not block the PR on them and do not include them in the main violations count. If there are no incidental findings, omit this section entirely.
-
-**Wait for the user to respond before making any changes.**
-
----
-
-### Step 5 — Make approved changes
-
-Once the user has reviewed the findings and told you which issues to fix:
-
-1. Make all approved changes. Do not make changes the user has not approved.
-2. After making all changes, run the full test suite to ensure nothing is broken.
-3. If tests fail after your changes, investigate and fix the issue. Do not leave the codebase in a broken state.
-
----
-
-### Step 6 — Commit
-
-After all approved changes have been made and tests pass, create a **single commit** containing all code review changes.
+Incidental findings are informational only. Do not include them in the main violations count. If there are no incidental findings, omit this section entirely.
 
 ---
 
 ## Constraints
 
-- **Always present findings to the user first.** Never make changes without the user's explicit approval.
+- **Return findings only. Do not make any changes.** The orchestrating agent is responsible for presenting findings to the user, collecting approvals, making changes, and committing.
 - **Do not block on minor style preferences** — only flag things that violate the principles above.
 - **Do not be exhaustive to the point of being unhelpful.** Focus on meaningful violations, not every possible micro-optimisation.
 - This review runs **once**, immediately before PR creation. Do not re-run it unless the user explicitly asks.
