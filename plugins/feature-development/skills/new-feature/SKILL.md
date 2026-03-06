@@ -12,7 +12,16 @@ When implementing a new feature or new functionality in an existing codebase, yo
 
    **If the user has described the feature in chat** (no file provided): require descriptive precision. If there is ambiguity in what the user is requesting, without being pedantic, ask for clarification. Once you have a clear understanding of the requirements, summarise what you are about to pass to the technical-spec agent and use `AskUserQuestion` to ask the user to confirm before you proceed.
 
-   In both cases, only after the user confirms should you invoke the technical-spec agent. The technical-spec agent will deeply analyse the codebase, produce a structured technical specification with a requirements table, and confirm the spec with the user within its own session. You will receive the approved spec back.
+   In both cases, only after the user confirms should you invoke the technical-spec agent. The technical-spec agent will deeply analyse the codebase and produce a structured technical specification with a requirements table. Once you receive the spec back:
+
+   1. Present the complete specification to the user and use `AskUserQuestion` to ask them to review it:
+
+      > _"Please review this technical specification. Select **Approved** to proceed, or select **Changes needed** and describe what needs to change."_
+
+      Provide at least two options: one for approval and one to request changes. If the user requests changes, re-invoke the technical-spec agent passing all three of: the original requirements, the existing technical specification, and the user's requested changes. This allows the agent to revise the spec directly without repeating its codebase analysis. Repeat this review step until approved.
+
+   2. If the original requirements were provided as a file (step 2), append the approved technical specification as a new `## Technical Specification` section at the end of that file. This serves as a permanent record of the agreed spec alongside the original requirements.
+
 3. Once you have the approved technical spec, start two things in parallel: hand the full technical spec to the test-writer agent (which runs in the background in an isolated worktree, and must be invoked with Write and Edit tool permissions), and begin writing implementation code yourself against the same spec. Both you and test-writer work from the requirements table in the technical spec.
 4. Once both you and the test-writer agent have finished, you must merge the test-writer's work into the current branch. The test-writer does not perform any git operations — it writes test files and reports what it created, but leaves the worktree uncommitted. When the test-writer's Task completes, its result will include the worktree path and branch name. Do the following in order:
 
