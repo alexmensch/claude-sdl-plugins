@@ -72,6 +72,12 @@ For each requirement (or group of related requirements), include:
 - Which existing utilities, constants, patterns, or abstractions should be reused.
 - Any ordering constraints (e.g. "Requirement 3 depends on the type added in Requirement 1").
 
+#### Naming conventions
+
+Specify the exact names to be used for all new public interfaces introduced by this feature — functions, methods, classes, types, constants, API endpoints, and configuration keys. Where a name has multiple valid forms (e.g. `getChannelById` vs `getChannelFromDb`, `windowHours` vs `windowSeconds`, camelCase vs snake_case response fields), choose one and state it explicitly. Both the implementer and the test-writer work from this section — consistent naming here prevents unnecessary discrepancies between the two parallel workstreams.
+
+Only include names that are genuinely ambiguous or worth specifying. Do not list names that are already established in the existing codebase.
+
 #### Out of scope
 
 Explicitly list anything that is related to the requirements but should **not** be included in this implementation. This prevents scope creep.
