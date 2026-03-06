@@ -103,4 +103,4 @@ A plugin name and a skill name should never be the same, even when a plugin cont
 
 ## License
 
-[MIT](LICENSE)
+[CC BY 4.0](LICENSE)
